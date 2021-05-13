@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,8 @@ namespace Jwt_NetCore3._1.Middleware
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
-                ValidateAudience = false,
+                ValidateAudience = true,
+                ValidAudiences = new List<string>() { _jwtSettings.Audience},
                 ClockSkew = TimeSpan.Zero
             }, out SecurityToken validatedToken);
 
